@@ -1,0 +1,100 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: black;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+/*assign this to the container that has the cards*/
+.main-scroll-div {
+    width: 90%;
+    height 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid red;
+}
+/*assign this to a div inside main-scroll-div*/
+.cover {
+    position: relative;
+    height: 90%;
+    width: 50%;
+}
+.cover::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    z-index: 99;
+    height: 100%;
+    width: 150px;
+    background-image: linear-gradient(90deg, black, transparent);
+}
+.cover::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    z-index: 99;
+    height: 100%;
+    width: 150px;
+    background-image: linear-gradient(-90deg, black, transparent);
+}
+/*assign this to a div inside cover*/
+.scroll-images {
+    width 100%;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow: auto;
+    position: relative;
+    scroll-behavior: smooth;
+}
+.card {
+    min-width: 600px;
+    height: 450px;
+    margin: 1px 10px;
+    cursor: pointer;
+    border: 1px solid white;
+    overflow: hidden;
+}
+/*images inside the div?*/
+.scroll-images::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+/*add a div on each side of the cover div, and add a button in each*/
+/*<button class="icon onclick="scrollLeft()"><i class="fas fa-angle-double-left"></button>"*/
+/*<button class="icon onclick="scrollRight()"><i class="fas fa-angle-double-right"></button>"*/
+.icon{
+    color: greenyellow;
+    background-color: black;
+    font-size: 50px;
+    outline: none;
+    border: none;
+    padding: 0px 20px;
+    cursor:pointer;
+}
+
+.icon:hover{
+    color: yellow;
+}
+
+add these to the JS
+function scrollLeft() {
+    var left = document.querySelector(".scroll-images");
+    left.scrollBy(350, 0)
+}
+function scrollRight() {
+    var right = document.querySelector(".scroll-images");
+    right.scrollBy(-350, 0)
+}
