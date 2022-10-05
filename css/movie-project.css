@@ -7,6 +7,7 @@
     /*justify-items: flex-start;*/
     height: 500px;
     width: 300px;
+    align-items: center;
 }
 
 #movieContainer {
@@ -16,3 +17,18 @@
     overflow-x: scroll;
 
 }
+
+.editButton {
+    border-radius: 13px;
+    background-color: dodgerblue;
+    width: 90%;
+}
+
+/*.form-control {*/
+/*    width: 10%;*/
+
+/*}*/
+
+/*form {*/
+/*    width: 30%;*/
+/*}*/
