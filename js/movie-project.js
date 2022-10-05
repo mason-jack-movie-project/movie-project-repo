@@ -1,5 +1,6 @@
 // Test
-
+// const moviesURL = 'https://assorted-sepia-mammal.glitch.me/movies';
+const moviesURL = 'https://cuddly-sage-cobra.glitch.me/movies';
 // fetch('https://assorted-sepia-mammal.glitch.me/movies').then
 
 let userDirectorInput = document.querySelector('#favMovie-Director');
