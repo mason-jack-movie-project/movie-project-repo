@@ -2,88 +2,112 @@
 
 // fetch('https://assorted-sepia-mammal.glitch.me/movies').then
 
+let userInput = document.getElementById('user-movie-input');
+console.log(userInput)
+
+
+let modification = {
+
+    "title": "",
+    "director": "",
+    "year": "",
+    "genre": "",
+    "actors": "",
+    "plot": "",
+    "rating": "",
+    "poster": "",
+    "id": ''
+
+}
+
 const moviesURL = 'https://assorted-sepia-mammal.glitch.me/movies';
 let movieData = [];
 
+const patchOptions = {
+    method: 'POST',
 
-// This is the request to the API to get Movie data
+    body: JSON.stringify(modification)
+}
+
+//const bookToPost = {
+//     title: 'Eleanor of Aquitaine',
+//     author: {
+//         firstName: 'Ralph',
+//         lastName: 'Turner'
+//     }
+// }
+
+//const deleteOptions = {
+//     method: 'DELETE',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     }
+// }
+
+
+
+// Fetch request. Calls the PrintMovies function to use the data in the fetch request and print it accordingly
 function getMovies () {
 
     fetch(moviesURL)
         .then(resp => resp.json())
             .then(data => {
+            // movieData = JSON.parse(data);
             movieData = data;
             console.log(movieData);
+            printMovies();
             return movieData;
         });
 
 }
 
-//function printWeather(data) {
-//         $( "#forecast-cards-container" ).empty(); // This will clear the cards before you put a new location
-//         data.list.forEach((forecast, i) => {
-//             // console.log(data);
-//             if (i % 8 === 0) {
-//                 $(`#forecast-cards-container`).append(`
-//                 <div class="card col-lg-2 forecast-card">
-//                     <p class="card-header"> Date: ${data.list[i].dt_txt.split(' ')[0]}</p>
-// <!--                    <hr class="stretchDiv">-->
-//                     <p>Temperature: ${data.list[i].main.temp}&#8457</p>
-//                     <div class="wrapper-image">
-//                         <img src="http://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png">
-//                     </div>
-//                     <p>Description: ${data.list[i].weather[0].description}</p>
-//                     <hr class="stretchDiv">
-//                     <p>Humidity: ${data.list[i].main.humidity}</p>
-//                     <hr class="stretchDiv">
-//                     <p>Wind Speed: ${data.list[i].wind.speed}</p>
-//                     <hr class="stretchDiv">
-//                     <p>Pressure: ${data.list[i].main.pressure}</p>
-//                 </div>`);
-//             }
-//         });
-//     }
-
-// This will be the function to print movie data to HTML
-// getMovies();
-// function printMovies () {
-//     fetch(moviesURL).then(
-//         document.getElementById('test').innerHTML =
-//         `
-//             <div class="card">Test again</div>
-//
-//         `
-//     );
-//
-//     // $('body').append(`
-//     //     <div><p>potato</p></div>
-//     //
-//     //     <div class="card">
-//     //     </div>`);
-//
-//         // document.getElementsByTagName('body').text = 'potato';
-// }
-
-// function printMovies () {
-//     fetch(moviesURL).then(resp => resp.json).then(data => console.log(data))
-//         .then(document.getElementById('test').innerHTML =
-//         `
-//             <div class="card">
-//             <p>Test Again</p>
-//
-//             </div>
-//         `);
-// }
-
+// Working Vanilla Function (with jQuery .empty() method)
 function printMovies () {
-    // fetch(moviesURL).then(resp => resp.json).then(data => {
-    // getMovies().then(
-    // console.log(data);
-    document.getElementById('test').innerHTML =
-        `<div class="card">
-            <p>Test Again</p>
-            <p>Title: ${movieData[0].title}</p>
-            </div>`
+    $('#movieContainer').empty();
+    movieData.forEach((element, i) => {
 
-// })
+        document.getElementById('movieContainer').innerHTML +=
+            `<div class="card">
+            <p>Test Again</p>
+            <p>Title: ${movieData[i].title}</p>
+            <p>Year: ${movieData[i].year}</p>
+            <img width="90%" height="60%" src=${movieData[i].poster}>
+            </div>`
+    });
+}
+
+// Need to make a function to select movie by id (or URL number??)
+
+function findMovieId(id) {
+    fetch(moviesURL + `/${id}`).then(resp => resp.json()).then(data => console.log(data));
+
+}
+
+//const bookToPost = {
+//     title: 'Eleanor of Aquitaine',
+//     author: {
+//         firstName: 'Ralph',
+//         lastName: 'Turner'
+//     }
+// }
+
+const movieToPost = {
+    //"title": "",
+    //         "director": "",
+    //         "year": "",
+    //         "genre": "",
+    //         "actors": "",
+    //         "plot": "",
+    //         "rating": "",
+    //         "poster": "",
+    //         "id": ''
+}
+
+// function addMovie (){
+//     // fetch(booksURL, postOptions).then(getBooks);
+//     fetch(moviesURL, postOptions).then(getMovies)
+// }
+
+function editMovie(element){
+
 }
