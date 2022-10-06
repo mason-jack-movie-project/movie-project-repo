@@ -9,21 +9,6 @@
 const moviesURL = 'https://assorted-sepia-mammal.glitch.me/movies';
 let movieData = [];
 
-// let movieInput = document.getElementById('movieInput');
-// let directorInput = document.querySelector('#directorInput')
-// let submitButton = document.querySelector('#submitButton');
-
-        // movieInput.change = function (){
-        //     console.log(movieInput.value);
-        // }
-        //
-        // submitButton.addEventListener('click', function (e){
-        //     e.preventDefault();
-        //     // console.log(movieInput.value);
-        //     console.log(directorInput.value);
-        //     console.log(movieInput.value)
-        // });
-
 
 // ############################################ Necessary Functions ####################################################
 
@@ -45,7 +30,7 @@ function printMovies () {
             <p>Title: ${movieData[i].title}</p>
             <p>Year: ${movieData[i].year}</p>
             <p>Rating: ${movieData[i].rating}</p>
-            <img width="90%" height="60%" src=${movieData[i].poster}>
+           <img width="90%" height="60%" class="cardImg" src=${movieData[i].poster}>
             <button class="editButton" data-edit="${movieData.id}">Edit</button>
              <button class="removeButton" data-del="${movieData.id}">Remove</button>
             </div>`
@@ -67,28 +52,28 @@ function getMovies () {
 
 }
 
-// $('#addMovieForm').submit((e) => {
-//     let addMovieObj = {
-//         title: $('#titleInput').val(),
-//         genre: $('#genreInput').val(),
-//         rating: $('#ratingInput').val(),
-//         plot: $('#plotInput').val()
-//     }
-//     console.log('This is the movie log');
-//     console.log(addMovieObj);
-//
-//
-//     let postOptions = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(addMovieObj)
-//     }
-//
-//     fetch(moviesURL, postOptions).then(resp => resp.json()).then(getMovies);
-//
-// });
+async function deleteCard(id) {
+    const deleteOptions = {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    fetch(`${moviesURL}/${id}`, deleteOptions)
+        // .then(getMovies);
+        .then(resp => resp.json())
+        .then(moviePosters => {
+            getMovies();
+            printMovies();
+        }).catch(error => console.log(error))
+}
+// Add event listener to delete the card
+$(document).on("click", ".removeButton", function(){
+    // console.log($(this).attr("data-delete-card"))
+    deleteCard($(this).attr("data-del"))
+});
+
 $('#addMovieForm').submit((e) => {
     e.preventDefault();
     // console.log('you clicked addmovie')
@@ -98,7 +83,7 @@ $('#addMovieForm').submit((e) => {
         genre: $("#genreInput").val(),
         rating: $("#ratingInput").val(),
         plot: $("#plotInput").val(),
-        poster: `<img src="img/not-found-image.jpeg">`
+        poster: ''
     }
     console.log("this is the add movie log")
     console.log(addMovie)
@@ -120,25 +105,4 @@ $('#addMovieForm').submit((e) => {
             printMovies();
         }).catch(error => console.log(error))
 
-});
-
-// async function addCard() {
-//     const postOptions = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     }
-//
-//     fetch(`${moviesURL}`, postOptions)
-//         // .then(getMovies);
-//         .then(resp => resp.json())
-//         .then(moviePosters => {
-//             movieGlitch();
-//         }).catch(error => console.log(error))
-// }
-// Add event listener to delete the card
-$(document.body).on("click", ".deleteMovieCard", function(){
-    // console.log($(this).attr("data-delete-card"))
-    deleteCard($(this).attr("data-delete-card"))
 });
