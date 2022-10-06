@@ -1,11 +1,4 @@
-function scrollLeft() {
-    var left = document.querySelector(".scroll-mask");
-    left.scrollBy(350, 0)
-}
-function scrollRight() {
-    var right = document.querySelector(".scroll-mask");
-    right.scrollBy(-350, 0)
-}
+
 // const moviesURL = 'https://assorted-sepia-mammal.glitch.me/movies';
 const moviesURL = 'https://cuddly-sage-cobra.glitch.me/movies';
 // fetch('https://assorted-sepia-mammal.glitch.me/movies').then
