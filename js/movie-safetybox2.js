@@ -46,8 +46,8 @@ function printMovies () {
             <p>Year: ${movieData[i].year}</p>
             <p>Rating: ${movieData[i].rating}</p>
             <img width="90%" height="60%" src=${movieData[i].poster}>
-            <button class="editButton">Edit</button>
-             <button class="removeButton">Remove</button>
+            <button class="editButton" data-edit="${movieData.id}">Edit</button>
+             <button class="removeButton" data-del="${movieData.id}">Remove</button>
             </div>`
     });
 }
@@ -66,3 +66,79 @@ function getMovies () {
         });
 
 }
+
+// $('#addMovieForm').submit((e) => {
+//     let addMovieObj = {
+//         title: $('#titleInput').val(),
+//         genre: $('#genreInput').val(),
+//         rating: $('#ratingInput').val(),
+//         plot: $('#plotInput').val()
+//     }
+//     console.log('This is the movie log');
+//     console.log(addMovieObj);
+//
+//
+//     let postOptions = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(addMovieObj)
+//     }
+//
+//     fetch(moviesURL, postOptions).then(resp => resp.json()).then(getMovies);
+//
+// });
+$('#addMovieForm').submit((e) => {
+    e.preventDefault();
+    // console.log('you clicked addmovie')
+
+    let addMovie = {
+        title: $("#titleInput").val(),
+        genre: $("#genreInput").val(),
+        rating: $("#ratingInput").val(),
+        plot: $("#plotInput").val(),
+        poster: `<img src="img/not-found-image.jpeg">`
+    }
+    console.log("this is the add movie log")
+    console.log(addMovie)
+
+    let postOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addMovie)
+    }
+    // POST movie
+
+    fetch(moviesURL, postOptions)
+        .then(resp => resp.json())
+        .then(moviePosters => {
+            console.log(moviePosters);
+            getMovies();
+            printMovies();
+        }).catch(error => console.log(error))
+
+});
+
+// async function addCard() {
+//     const postOptions = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     }
+//
+//     fetch(`${moviesURL}`, postOptions)
+//         // .then(getMovies);
+//         .then(resp => resp.json())
+//         .then(moviePosters => {
+//             movieGlitch();
+//         }).catch(error => console.log(error))
+// }
+// Add event listener to delete the card
+$(document.body).on("click", ".deleteMovieCard", function(){
+    // console.log($(this).attr("data-delete-card"))
+    deleteCard($(this).attr("data-delete-card"))
+});

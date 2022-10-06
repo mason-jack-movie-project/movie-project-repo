@@ -27,18 +27,18 @@
 
 <!--</form>-->
 
-<form class="row g-3">
+<form id="addMovieForm" class="row g-3">
   <div>
     <h3>Add a Movie!</h3>
   </div>
   <div class="col-md-6">
 
-    <label for="title" class="form-label">Title: </label>
-    <input type="text" class="form-control" id="title">
+    <label for="titleInput" class="form-label">Title: </label>
+    <input type="text" class="form-control" id="titleInput">
   </div>
   <div class="col-md-6">
-    <label for="directorInput" class="form-label">Director</label>
-    <input type="text" class="form-control" id="directorInput">
+    <label for="ratingInput" class="form-label">Rating: </label>
+    <input type="text" class="form-control" id="ratingInput">
   </div>
   <div class="col-12">
     <label for="releaseDateInput" class="form-label">Release Date: </label>
@@ -54,8 +54,8 @@
   </div>
 
   <div class="col-md-4">
-    <label for="inputGenre" class="form-label">Genre </label>
-    <select id="inputGenre" class="form-select">
+    <label for="genreInput" class="form-label">Genre </label>
+    <select id="genreInput" class="form-select">
       <option selected>Choose...</option>
       <option>Sci-Fi</option>
       <option>Fantasy</option>
@@ -71,7 +71,8 @@
 <!--  </div>-->
   </div>
   <div class="col-12">
-    <button type="submit" class="btn btn-primary">Add Movie</button>
+    <button id="addMovieButton" type="submit" class="btn btn-primary">Add Movie</button>
+    <label for="addMovieButton"></label>
   </div>
 </form>
 
