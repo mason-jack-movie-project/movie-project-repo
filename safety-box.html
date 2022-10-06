@@ -5,9 +5,7 @@
   <title>Movie Project</title>
   <!-- CSS only -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
-
-  <!--  <link rel="stylesheet" href="css/movie-project.css">-->
+  <link rel="stylesheet" href="css/movie-project.css">
   <!--Scripts-->
   <!--keys-->
   <!--<script src="js/keys.js"></script>-->
@@ -19,66 +17,76 @@
   <script src="js/movie-project-safetybox.js"></script>
   <!--/Scripts-->
 </head>
-<body>
+<body onload="getMovies()">
 
 
 
 <!--    <div class="container">-->
-<div id="movieContainer" class="row">
+<div id="movieContainer">
+<!--  removed row, container stopped resizing-->
 
-  <button class="icon onclick="scrollLeft()"><i class="fas fa-angle-double-left"></button>
-  <div id="cover">
-    <div class="scroll-cards">
 
-    </div>
-  </div>
-  <button class="icon onclick="scrollRight()"><i class="fas fa-angle-double-right"></button>
+
+
+
+      <div class="scrollmask" id="scrollmask">
+        <div id="scroll-cards">
+
+        </div>
+      </div>
+
+      <div class="icon arrow-left" onclick="scrollmask.scrollBy(-100, 0)"> < </div>
+      <div class="cover"></div>-->
+      <div class="icon arrow-right" onclick="scrollmask.scrollBy(100, 0)"> > </div>
+
+
+
 </div>
 <!--    </div>-->
 
 
-<div>
+<!--<div>-->
 
-  <form class="row g-3">
-    <div>
-      <h3>Add a Movie!</h3>
-    </div>
-    <div class="col-md-6">
+<!--  <form class="row g-3">-->
+<!--    <div>-->
+<!--      <h3>Add a Movie!</h3>-->
+<!--    </div>-->
+<!--    <div class="col-md-6">-->
 
-      <label for="title" class="form-label">Title: </label>
-      <input type="text" class="form-control" id="title">
-    </div>
-    <div class="col-md-6">
-      <label for="directorInput" class="form-label">Director</label>
-      <input type="text" class="form-control" id="directorInput">
-    </div>
-    <div class="col-12">
-      <label for="releaseDateInput" class="form-label">Release Date: </label>
-      <input type="text" class="form-control" id="releaseDateInput" placeholder="Ex: '1996'">
-    </div>
-    <div class="col-12">
-      <label for="castInput" class="form-label">Cast: </label>
-      <input type="text" class="form-control" id="castInput">
-    </div>
-    <div class="col-md-6">
-      <label for="plotInput" class="form-label">Plot: </label>
-      <input type="text" class="form-control" id="plotInput">
-    </div>
+<!--      <label for="title" class="form-label">Title: </label>-->
+<!--      <input type="text" class="form-control" id="title">-->
+<!--    </div>-->
+<!--    <div class="col-md-6">-->
+<!--      <label for="directorInput" class="form-label">Director</label>-->
+<!--      <input type="text" class="form-control" id="directorInput">-->
+<!--    </div>-->
+<!--    <div class="col-12">-->
+<!--      <label for="releaseDateInput" class="form-label">Release Date: </label>-->
+<!--      <input type="text" class="form-control" id="releaseDateInput" placeholder="Ex: '1996'">-->
+<!--    </div>-->
+<!--    <div class="col-12">-->
+<!--      <label for="castInput" class="form-label">Cast: </label>-->
+<!--      <input type="text" class="form-control" id="castInput">-->
+<!--    </div>-->
+<!--    <div class="col-md-6">-->
+<!--      <label for="plotInput" class="form-label">Plot: </label>-->
+<!--      <input type="text" class="form-control" id="plotInput">-->
+<!--    </div>-->
 
-    <div class="col-md-4">
-      <label for="inputGenre" class="form-label">Genre </label>
-      <select id="inputGenre" class="form-select">
-        <option selected>Choose...</option>
-        <option>Sci-Fi</option>
-        <option>Fantasy</option>
-        <option>Comedy</option>
-        <option>Thriller</option>
-        <option>Horror</option>
-        <option>Drama</option>
-      </select>
-    </div>
+<!--    <div class="col-md-4">-->
+<!--      <label for="inputGenre" class="form-label">Genre </label>-->
+<!--      <select id="inputGenre" class="form-select">-->
+<!--        <option selected>Choose...</option>-->
+<!--        <option>Sci-Fi</option>-->
+<!--        <option>Fantasy</option>-->
+<!--        <option>Comedy</option>-->
+<!--        <option>Thriller</option>-->
+<!--        <option>Horror</option>-->
+<!--        <option>Drama</option>-->
+<!--      </select>-->
+<!--    </div>-->
 
-</div>
+<!--</div>-->
 
 
 
