@@ -1,9 +1,21 @@
+#movieContainer {
+    margin: 12px;
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: center;
+    /*width: 100%;*/
+    overflow-x: scroll;
+
+
+
+}
+
 .card {
-    width: fit-content;
-    height: fit-content;
-    /*padding: 5px 0;*/
+    /*width: fit-content;*/
+    /*height: fit-content;*/
+    padding: 0;
     margin: 0 10px;
-    flex-grow: 1;
+    /*flex-grow: 1;*/
     /*justify-items: flex-start;*/
     height: 500px;
     width: 300px;
@@ -19,14 +31,7 @@
     justify-items: flex-start;
 }
 
-#movieContainer {
-    margin: 12px;
-    display: flex;
-    justify-content: center;
-    /*width: 100%;*/
-    overflow-x: scroll;
 
-}
 
 .editButton {
     border-radius: 13px;
@@ -56,6 +61,7 @@
     margin-right: 15px;
 }
 .cardImg {
-    width: 90%;
+    width: 100%;
     height: 60%;
 }
+
