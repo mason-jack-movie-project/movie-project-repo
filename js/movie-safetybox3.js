@@ -51,7 +51,7 @@ function printMovies () {
 // Fetch request. Calls the PrintMovies function to use the data in the fetch request and print it accordingly
 function getMovies () {
 
-    fetch(moviesURL)
+    return fetch(moviesURL)
         .then(resp => resp.json())
         .then(data => {
             // movieData = JSON.parse(data);
@@ -59,10 +59,10 @@ function getMovies () {
             console.log(movieData);
             console.log(data)
             printMovies();
+            loader.style.display="none";
             return data;
 
         });
-    loader.style.display="none";
 }
 
 async function deleteCard(id) {
@@ -84,7 +84,7 @@ async function deleteCard(id) {
 // Add event listener to delete the card
 $(document).on("click", ".removeButton", function(){
     // console.log($(this).attr("data-delete-card"))
-    deleteCard($(this).attr("data-delete-card"))
+    deleteCard($(this).attr("data-delete-card"));
 });
 
 
@@ -126,6 +126,7 @@ $('#addMovieForm').submit((e) => {
 
 //Variable for option to edit
 async function editMovie(movieID){
+    $('#modal-div').attr('data-edit-modal', movieID)
     getMovies().then(movies =>{
         for(let movie of movies){
             if(movie.id === parseInt(movieID)){
@@ -143,31 +144,38 @@ async function editMovie(movieID){
             }
         }
     });
-    $(document.body).on("click", "#added-edited-movie-button", function(){
-        let newMovie = {
-            // edit-title
-            // edit-rating
-            // edit-release-date
-            // edit-cast
-            // edit-plot
-            title:  $("#edit-title").val(),
-            rating: $("#edit-rating").val(),
-            year:   $("#edit-release-date").val(),
-            cast: $("#edit-cast").val(),
-            plot: $("#edit-plot").val()
-        }
-        const editOption = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(newMovie)
-        }
-        fetch(moviesURL + `/${movieID}`, editOption)
-            .then(results => results.json())
-            .then(data => {
-                getMovies();
-                // printMovies();
-            });
-    })
+
+
 }
+$(document.body).on("click", "#added-edited-movie-button", function(){
+    let newMovie = {
+        // edit-title
+        // edit-rating
+        // edit-release-date
+        // edit-cast
+        // edit-plot
+        title:  $("#edit-title").val(),
+        rating: $("#edit-rating").val(),
+        year:   $("#edit-release-date").val(),
+        cast: $("#edit-cast").val(),
+        plot: $("#edit-plot").val()
+    }
+    const editOption = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(newMovie)
+    }
+    let movieID = $('#modal-div').attr('data-edit-modal')
+    fetch(moviesURL + `/${movieID}`, editOption)
+        .then(results => results.json())
+        .then(data => {
+            getMovies();
+            // printMovies();
+        });
+});
+$(document).on("click", ".editButton", function() {
+    // console.log($(this).attr("data-delete-card"))
+    editMovie($(this).attr("data-edit-card"))
+});
