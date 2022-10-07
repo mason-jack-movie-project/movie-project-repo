@@ -16,6 +16,7 @@ let loader = document.getElementById("preloader");
 //     loader.style.display="none";
 // ############################################ Necessary Functions ####################################################
 
+
 // Need to make a function to select movie by id (or URL number??)
 function findMovieId(id) {
     fetch(moviesURL + `/${id}`).then(resp => resp.json()).then(data => {
@@ -23,28 +24,6 @@ function findMovieId(id) {
     });
 
 }
-
-async function editCard(id) {
-    let editMovie = {
-        title: $("#edit-title").val(),
-        cast: $("#edit-cast").val(),
-        genre: $("#edit-genre").val(),
-        year: $("#edit-release-date").val(),
-        rating: $("#edit-rating").val(),
-        plot: $("#edit-plot").val(),
-    }
-    const patchOptions = {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(editMovie)
-    }
-
-    fetch(moviesURL + "/"+ id, patchOptions).then(getMovies);
-
-}
-
 
 // Working Vanilla Function (with jQuery .empty() method)
 function printMovies () {
@@ -55,18 +34,16 @@ function printMovies () {
     movieData.forEach((element, i) => {
 
         document.getElementById('scroll-cards').innerHTML +=
-            `<div class="card">
+            `<div data-movie-id="${element.id}" class="card">
             <img class="cardImg" src=${element.poster}>
             <p>Title: ${element.title}</p>
             <p>Year: ${element.year}</p>
             <p>Rating: ${element.rating}</p>
-            <button class="editButton" data-edit-card="${element.id}"><a href="#modal-div" data-bs-toggle="modal">Edit</a></button>
+            <button data-bs-toggle="modal" data-bs-target="#modal-div" class="editButton" data-edit-card="${element.id}"><a href="#modal-div" data-bs-toggle="modal">Edit</a></button>
             <button class="removeButton" data-delete-card="${element.id}">X</button>
             </div>`
 
     }); // forEach end
-
-
     document.getElementById('scroll-cards').innerHTML +=
         `<div class="smolcard">_</div>`
 }
@@ -80,17 +57,12 @@ function getMovies () {
             // movieData = JSON.parse(data);
             movieData = data;
             console.log(movieData);
+            console.log(data)
             printMovies();
-            return movieData;
+            return data;
 
         });
     loader.style.display="none";
-    $(document).on('click', '#save-edits-button', function (e){
-        e.preventDefault();
-        console.log('yo');
-        editCard($(this).attr("data-edit-card"));
-    });
-
 }
 
 async function deleteCard(id) {
@@ -152,45 +124,50 @@ $('#addMovieForm').submit((e) => {
 
 });
 
-//$('#insert-modal-here').append(`<form id="edit-movie-form" class="row g-3">
-//             <div>
-//               <h3>Edit Movie</h3>
-//             </div>
-//             <div class="col-md-6">
-//
-//               <label for="edit-title" class="form-label">Title: </label>
-//               <input type="text" class="form-control" id="edit-title">
-//             </div>
-//             <div class="col-md-6">
-//               <label for="edit-rating" class="form-label">Rating: </label>
-//               <input type="text" class="form-control" id="edit-rating">
-//             </div>
-//             <div class="col-12">
-//               <label for="edit-release-date" class="form-label">Release Date: </label>
-//               <input type="text" class="form-control" id="edit-release-date" placeholder="Ex: '1996'">
-//             </div>
-//             <div class="col-12">
-//               <label for="edit-cast" class="form-label">Cast: </label>
-//               <input type="text" class="form-control" id="edit-cast">
-//             </div>
-//             <div class="col-md-6">
-//               <label for="edit-plot" class="form-label">Plot: </label>
-//               <input type="text" class="form-control" id="edit-plot">
-//             </div>
-//
-//             <div class="col-md-4">
-//               <label for="edit-genre" class="form-label">Genre </label>
-//               <select id="edit-genre" class="form-select">
-//
-//                 <option>Sci-Fi</option>
-//                 <option>Fantasy</option>
-//                 <option>Comedy</option>
-//                 <option>Thriller</option>
-//                 <option>Horror</option>
-//                 <option>Drama</option>
-//               </select>
-//             </div>
-//
-//
-//
-//           </form>`)
+//Variable for option to edit
+async function editMovie(movieID){
+    getMovies().then(movies =>{
+        for(let movie of movies){
+            if(movie.id === parseInt(movieID)){
+            //                  edit-title
+            //               edit-rating
+            //               edit-release-date
+            //               edit-cast
+            //               edit-plot
+                $("#edit-title").attr("value", movie.title);
+                $("#edit-rating").attr("value", movie.rating);
+                $("#edit-release-date").attr("value", movie.year);
+                $("#edit-cast").attr("value", movie.cast);
+                $("#edit-plot").attr("value", movie.plot);
+                $("#save-edits-button").attr("id", "added-edited-movie-button");
+            }
+        }
+    });
+    $(document.body).on("click", "#added-edited-movie-button", function(){
+        let newMovie = {
+            // edit-title
+            // edit-rating
+            // edit-release-date
+            // edit-cast
+            // edit-plot
+            title:  $("#edit-title").val(),
+            rating: $("#edit-rating").val(),
+            year:   $("#edit-release-date").val(),
+            cast: $("#edit-cast").val(),
+            plot: $("#edit-plot").val()
+        }
+        const editOption = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(newMovie)
+        }
+        fetch(moviesURL + `/${movieID}`, editOption)
+            .then(results => results.json())
+            .then(data => {
+                getMovies();
+                // printMovies();
+            });
+    })
+}
