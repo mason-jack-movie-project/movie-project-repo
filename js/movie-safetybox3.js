@@ -2,7 +2,7 @@
 
 // ############################################ Variables #############################################################
 /*
- Mason's Glitch
+ Mason's Glitch link
  const moviesURL = 'https://assorted-sepia-mammal.glitch.me/movies';
 */
 
@@ -12,18 +12,8 @@ let movieData = [];
 
 
 let loader = document.getElementById("preloader");
-// document.addEventListener("", function() {
-//     loader.style.display="none";
+
 // ############################################ Necessary Functions ####################################################
-
-
-// Need to make a function to select movie by id (or URL number??)
-function findMovieId(id) {
-    fetch(moviesURL + `/${id}`).then(resp => resp.json()).then(data => {
-        console.log(data);
-    });
-
-}
 
 // Working Vanilla Function (with jQuery .empty() method)
 function printMovies () {
@@ -48,7 +38,7 @@ function printMovies () {
         `<div class="smolcard">_</div>`
 }
 
-// Fetch request. Calls the PrintMovies function to use the data in the fetch request and print it accordingly
+// Initial Fetch request which calls printMovies() function
 function getMovies () {
 
     fetch(moviesURL)
@@ -58,7 +48,7 @@ function getMovies () {
             movieData = data;
             console.log(movieData);
             console.log(data)
-            printMovies();
+            printMovies(); // called printMovies() which displays the movies based on data
             return data;
 
         });
@@ -129,11 +119,7 @@ async function editMovie(movieID){
     getMovies().then(movies =>{
         for(let movie of movies){
             if(movie.id === parseInt(movieID)){
-            //                  edit-title
-            //               edit-rating
-            //               edit-release-date
-            //               edit-cast
-            //               edit-plot
+
                 $("#edit-title").attr("value", movie.title);
                 $("#edit-rating").attr("value", movie.rating);
                 $("#edit-release-date").attr("value", movie.year);
@@ -145,11 +131,6 @@ async function editMovie(movieID){
     });
     $(document.body).on("click", "#added-edited-movie-button", function(){
         let newMovie = {
-            // edit-title
-            // edit-rating
-            // edit-release-date
-            // edit-cast
-            // edit-plot
             title:  $("#edit-title").val(),
             rating: $("#edit-rating").val(),
             year:   $("#edit-release-date").val(),
@@ -167,7 +148,6 @@ async function editMovie(movieID){
             .then(results => results.json())
             .then(data => {
                 getMovies();
-                // printMovies();
             });
     })
 }
