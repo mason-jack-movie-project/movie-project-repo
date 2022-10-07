@@ -6,6 +6,14 @@
     color: white;
 }
 
+/*.modal::backdrop {*/
+/*    background-color: red;*/
+/*}*/
+
+.modal-footer {
+    background-color: black;
+}
+
 body {
     background-color: black;
     display: flex;
@@ -118,6 +126,8 @@ body {
     right: 0;
 }
 
+
+
 /*.card {*/
 /*    width: fit-content;*/
 /*    height: fit-content;*/
@@ -174,21 +184,19 @@ body {
 }
 
 
-/*.icon:hover{*/
-/*    color: yellow;*/
-/*}*/
+.icon:hover{
+    color: yellow;
+}
 
-/*add these to the JS*/
-/*function scrollLeft() {*/
-/*    var left = document.querySelector(".scroll-images");*/
-/*    left.scrollBy(350, 0)*/
-/*}*/
-/*function scrollRight() {*/
-/*    var right = document.querySelector(".scroll-images");*/
-/*    right.scrollBy(-350, 0)*/
-/*}*/
-
-
+#preloader {
+    position: absolute;
+    top: 0;
+    background: rgb(0 0 0 /.9) url("/img/infiniload.gif") no-repeat center center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+}
 
 
 

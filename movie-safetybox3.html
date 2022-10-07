@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/movie-safetybox.css">
 </head>
 <body onload="getMovies()">
+<div id="preloader"></div>
 
 <div class="row">
 <!--    <div class="container">-->
@@ -33,6 +34,68 @@
 <!--    <label for="directorInput"></label>-->
 <!--    <button id="submitButton">Submit</button>-->
 <!--  </div>-->
+
+
+<!-- BootStrap Modal -->
+  <div class="modal" tabindex="-1" id="modal-div">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="insert-modal-here" class="modal-body">
+<!--          <form id="edit-movie-form" class="row g-3">-->
+<!--            <div>-->
+<!--              <h3>Edit Movie</h3>-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+
+<!--              <label for="edit-title" class="form-label">Title: </label>-->
+<!--              <input type="text" class="form-control" id="edit-title">-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <label for="edit-rating" class="form-label">Rating: </label>-->
+<!--              <input type="text" class="form-control" id="edit-rating">-->
+<!--            </div>-->
+<!--            <div class="col-12">-->
+<!--              <label for="edit-release-date" class="form-label">Release Date: </label>-->
+<!--              <input type="text" class="form-control" id="edit-release-date" placeholder="Ex: '1996'">-->
+<!--            </div>-->
+<!--            <div class="col-12">-->
+<!--              <label for="edit-cast" class="form-label">Cast: </label>-->
+<!--              <input type="text" class="form-control" id="edit-cast">-->
+<!--            </div>-->
+<!--            <div class="col-md-6">-->
+<!--              <label for="edit-plot" class="form-label">Plot: </label>-->
+<!--              <input type="text" class="form-control" id="edit-plot">-->
+<!--            </div>-->
+
+<!--            <div class="col-md-4">-->
+<!--              <label for="edit-genre" class="form-label">Genre </label>-->
+<!--              <select id="edit-genre" class="form-select">-->
+
+<!--                <option>Sci-Fi</option>-->
+<!--                <option>Fantasy</option>-->
+<!--                <option>Comedy</option>-->
+<!--                <option>Thriller</option>-->
+<!--                <option>Horror</option>-->
+<!--                <option>Drama</option>-->
+<!--              </select>-->
+<!--            </div>-->
+
+
+
+<!--          </form>-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" id="save-edits-button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- BootStrap Modal -->
 
 <!--</form>-->
 <div class="col-12">
@@ -65,8 +128,7 @@
   <div class="col-md-4">
     <label for="genreInput" class="form-label">Genre </label>
     <select id="genreInput" class="form-select">
-      <option selected>Choose...</option>
-      <option>Sci-Fi</option>
+      <option selected>Sci-Fi</option>
       <option>Fantasy</option>
       <option>Comedy</option>
       <option>Thriller</option>
@@ -74,14 +136,11 @@
       <option>Drama</option>
     </select>
   </div>
-<!--  <div class="col-md-2">-->
-<!--    <label for="inputZip" class="form-label">Zip</label>-->
-<!--    <input type="text" class="form-control" id="inputZip">-->
-<!--  </div>-->
+
 
   <div class="col-12">
-    <button id="addMovieButton" type="submit" class="btn btn-primary">Add Movie</button>
-    <label for="addMovieButton"></label>
+    <button id="edit-movie-button" type="submit" class="btn btn-primary">Add Movie</button>
+    <label for="edit-movie-button"></label>
   </div>
 </form>
 </div>
