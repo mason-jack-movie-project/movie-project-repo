@@ -1,8 +1,6 @@
-
-
 // ############################################ Variables #############################################################
 /*
- Mason's Glitch link
+ Mason's Glitch
  const moviesURL = 'https://assorted-sepia-mammal.glitch.me/movies';
 */
 
@@ -12,8 +10,18 @@ let movieData = [];
 
 
 let loader = document.getElementById("preloader");
-
+// document.addEventListener("", function() {
+//     loader.style.display="none";
 // ############################################ Necessary Functions ####################################################
+
+
+// Need to make a function to select movie by id (or URL number??)
+function findMovieId(id) {
+    fetch(moviesURL + `/${id}`).then(resp => resp.json()).then(data => {
+        console.log(data);
+    });
+
+}
 
 // Working Vanilla Function (with jQuery .empty() method)
 function printMovies () {
@@ -38,21 +46,21 @@ function printMovies () {
         `<div class="smolcard">_</div>`
 }
 
-// Initial Fetch request which calls printMovies() function
+// Fetch request. Calls the PrintMovies function to use the data in the fetch request and print it accordingly
 function getMovies () {
 
-    fetch(moviesURL)
+    return fetch(moviesURL)
         .then(resp => resp.json())
         .then(data => {
             // movieData = JSON.parse(data);
             movieData = data;
             console.log(movieData);
             console.log(data)
-            printMovies(); // called printMovies() which displays the movies based on data
+            printMovies();
+            loader.style.display="none";
             return data;
 
         });
-    loader.style.display="none";
 }
 
 async function deleteCard(id) {
@@ -74,7 +82,7 @@ async function deleteCard(id) {
 // Add event listener to delete the card
 $(document).on("click", ".removeButton", function(){
     // console.log($(this).attr("data-delete-card"))
-    deleteCard($(this).attr("data-delete-card"))
+    deleteCard($(this).attr("data-delete-card"));
 });
 
 
@@ -116,10 +124,15 @@ $('#addMovieForm').submit((e) => {
 
 //Variable for option to edit
 async function editMovie(movieID){
+    $('#modal-div').attr('data-edit-modal', movieID)
     getMovies().then(movies =>{
         for(let movie of movies){
             if(movie.id === parseInt(movieID)){
-
+                //                  edit-title
+                //               edit-rating
+                //               edit-release-date
+                //               edit-cast
+                //               edit-plot
                 $("#edit-title").attr("value", movie.title);
                 $("#edit-rating").attr("value", movie.rating);
                 $("#edit-release-date").attr("value", movie.year);
@@ -130,26 +143,37 @@ async function editMovie(movieID){
         }
     });
 
-    // Edit option attempt
-    $(document.body).on("click", "#added-edited-movie-button", function(){
-        let newMovie = {
-            title:  $("#edit-title").val(),
-            rating: $("#edit-rating").val(),
-            year:   $("#edit-release-date").val(),
-            cast: $("#edit-cast").val(),
-            plot: $("#edit-plot").val()
-        }
-        const editOption = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type' : 'application/json'
-            },
-            body: JSON.stringify(newMovie)
-        }
-        fetch(moviesURL + `/${movieID}`, editOption)
-            .then(results => results.json())
-            .then(data => {
-                getMovies();
-            });
-    })
+
 }
+$(document.body).on("click", "#added-edited-movie-button", function(){
+    let newMovie = {
+        // edit-title
+        // edit-rating
+        // edit-release-date
+        // edit-cast
+        // edit-plot
+        title:  $("#edit-title").val(),
+        rating: $("#edit-rating").val(),
+        year:   $("#edit-release-date").val(),
+        cast: $("#edit-cast").val(),
+        plot: $("#edit-plot").val()
+    }
+    const editOption = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(newMovie)
+    }
+    let movieID = $('#modal-div').attr('data-edit-modal')
+    fetch(moviesURL + `/${movieID}`, editOption)
+        .then(results => results.json())
+        .then(data => {
+            getMovies();
+            // printMovies();
+        });
+});
+$(document).on("click", ".editButton", function() {
+    // console.log($(this).attr("data-delete-card"))
+    editMovie($(this).attr("data-edit-card"))
+});
