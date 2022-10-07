@@ -151,7 +151,7 @@ body {
 /*<button class="icon onclick="scrollLeft()"><i class="fas fa-angle-double-left"></button>"*/
 /*<button class="icon onclick="scrollRight()"><i class="fas fa-angle-double-right"></button>"*/
 .icon{
-    color: greenyellow;
+    color: red;
     background-color: black;
     font-size: 50px;
     outline: none;
@@ -185,7 +185,7 @@ body {
 
 
 .icon:hover{
-    color: yellow;
+    color: lawngreen;
 }
 
 #preloader {
