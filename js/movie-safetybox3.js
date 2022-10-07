@@ -129,6 +129,8 @@ async function editMovie(movieID){
             }
         }
     });
+
+    // Edit option attempt
     $(document.body).on("click", "#added-edited-movie-button", function(){
         let newMovie = {
             title:  $("#edit-title").val(),
